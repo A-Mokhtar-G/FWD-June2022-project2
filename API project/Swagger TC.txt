@@ -1,0 +1,55 @@
+API: GET /api/v1/Authors
+-Test Case 01 : response should be 200 OK
+	Expected Result: 200 OK
+	Actual Result: 200 OK
+	Status: Pass
+
+-Test Case 02 : Objects inside response body contain id, idBook, firstName, lastName
+	Expected Result: id, idBook, firstName, lastName
+	Actual Result: id, idBook, firstName, lastName
+	Status: pass
+
+API: POST /api/v1/Authors
+-Test Case 03 :  response should be 200 OK
+	Expected Result: 200 OK
+	Actual Result: 200 OK
+	Status: Pass
+
+-Test Case 04 : Objects inside response body contain id, idBook, firstName "Ahmed", lastName "Mokhtar"
+	Expected Result: Objects inside response body contain id, idBook, firstName "Ahmed", lastName "Mokhtar"
+	Actual Result: Objects inside response body contain id, idBook, firstName "Ahmed", lastName "Mokhtar"
+	Status: pass
+
+-Test Case 05 : Response should be 400 if first name is missing
+	Expected Result: 400
+	Actual Result: 200
+	Status: fail
+
+-Test Case 06 : Response should be 400 if lastname is missing
+	Expected Result: 400
+	Actual Result: 200
+	Status: fail
+
+API: GET /api​/v1​/Authors​/authors​/books​/{idBook}
+-Test Case 07 : idBook in response should have same number as sent in parameter
+	Expected Result: 7
+	Actual Result: 7
+	Status: pass
+
+API: PUT /api/v1/Authors/{id}
+-Test Case 08 : id, idBook, firstName "Ahmed", lastName "Mokhtar" in response should have same number as sent in parameter
+	Expected Result: id '9', idBook '0', firstName "Ahmed", lastName "Mokhtar"
+	Actual Result: id '9', idBook '0', firstName "Ahmed", lastName "Mokhtar"
+	Status: pass
+
+API: GET /api/v1/Authors/{id}
+-Test Case 09 : Data should be updated as per PUT request
+	Expected Result: id '9', idBook '0', firstName "Ahmed", lastName "Mokhtar"
+	Actual Result: id '9', idBook '3', firstName "First Name 9", lastName "Last Name 9"
+	Status: Fail
+
+API: DELETE /api/v1/Authors/{id}
+-Test Case 10 : response should be 200 OK
+	Expected Result: 200 OK
+	Actual Result: 200 OK
+	Status: Pass

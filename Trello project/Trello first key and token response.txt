@@ -1,0 +1,101 @@
+{
+    "id": "62e132023d222d5cb9db3c4c",
+    "aaId": "62e132000b4bf7ad924b2725",
+    "activityBlocked": false,
+    "avatarHash": "e753333b167908b5d2f31a15ff8fae5e",
+    "avatarUrl": "https://trello-members.s3.amazonaws.com/62e132023d222d5cb9db3c4c/e753333b167908b5d2f31a15ff8fae5e",
+    "bio": "",
+    "bioData": null,
+    "confirmed": true,
+    "fullName": "ahmed mokhtar",
+    "idEnterprise": null,
+    "idEnterprisesDeactivated": [],
+    "idMemberReferrer": null,
+    "idPremOrgsAdmin": [],
+    "initials": "AM",
+    "memberType": "normal",
+    "nonPublic": {},
+    "nonPublicAvailable": true,
+    "products": [],
+    "url": "https://trello.com/ahmedmokhtar61",
+    "username": "ahmedmokhtar61",
+    "status": "disconnected",
+    "aaBlockSyncUntil": null,
+    "aaEmail": null,
+    "aaEnrolledDate": null,
+    "avatarSource": "none",
+    "credentialsRemovedCount": 0,
+    "domainClaimed": null,
+    "email": "a.mokhtar.g@gmail.com",
+    "goldSunsetFreeTrialIdOrganization": null,
+    "gravatarHash": "8fbb9560549d2b4846bda55cb201ebbd",
+    "idBoards": [
+        "62e1323cea7c278d1ca0aeed"
+    ],
+    "idOrganizations": [
+        "62e1321b80d3b05e7d19cd82",
+        "62e1346e94c1ad71b747ebdd"
+    ],
+    "idEnterprisesAdmin": [],
+    "limits": {
+        "boards": {
+            "totalPerMember": {
+                "status": "ok",
+                "disableAt": 4500,
+                "warnAt": 3600
+            }
+        },
+        "orgs": {
+            "totalPerMember": {
+                "status": "ok",
+                "disableAt": 850,
+                "warnAt": 680
+            }
+        }
+    },
+    "loginTypes": [
+        "atlassian"
+    ],
+    "marketingOptIn": {
+        "optedIn": true,
+        "date": "2022-07-27T12:39:32.699Z"
+    },
+    "messagesDismissed": [],
+    "oneTimeMessagesDismissed": [
+        "sent-possible-new-signup-event",
+        "close-menu-of-first-board"
+    ],
+    "prefs": {
+        "privacy": {
+            "fullName": "public",
+            "avatar": "public"
+        },
+        "sendSummaries": true,
+        "minutesBetweenSummaries": 60,
+        "minutesBeforeDeadlineToNotify": 1440,
+        "colorBlind": false,
+        "locale": "en-US"
+    },
+    "trophies": [],
+    "uploadedAvatarHash": null,
+    "uploadedAvatarUrl": null,
+    "premiumFeatures": [
+        "additionalBoardBackgrounds",
+        "additionalStickers",
+        "customBoardBackgrounds",
+        "customEmoji",
+        "customStickers",
+        "plugins"
+    ],
+    "isAaMastered": true,
+    "ixUpdate": "15",
+    "boards": [
+        {
+            "id": "62e1323cea7c278d1ca0aeed",
+            "name": "my first board",
+            "closed": false,
+            "idOrganization": "62e1321b80d3b05e7d19cd82",
+            "pinned": false
+        }
+    ]
+}
