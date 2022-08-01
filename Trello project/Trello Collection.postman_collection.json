@@ -1,0 +1,413 @@
+{
+	"info": {
+		"_postman_id": "486d2cd1-8fee-48dd-9873-6c4095b3ef35",
+		"name": "Trello Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21782579"
+	},
+	"item": [
+		{
+			"name": "create a board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"closed is false\",function()\r",
+							"{\r",
+							"pm.expect(jsonData.closed).to.equal(false);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"permissionLevel is private\",function()\r",
+							"{\r",
+							"pm.expect(jsonData.prefs.permissionLevel).to.equal(\"private\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"canBePublic is true\",function()\r",
+							"{\r",
+							"pm.expect(jsonData.prefs.canBePublic).to.equal(true);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"canInvite is true\",function()\r",
+							"{\r",
+							"pm.expect(jsonData.prefs.canInvite).to.equal(true);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{trelloBaseURL}}/1/boards/?key={{key}}&token={{token}}&name=john",
+					"host": [
+						"{{trelloBaseURL}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "name",
+							"value": "john"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all open boards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"var numberOfBoards = jsonData.boards.length;\r",
+							"var FirstBoardID = jsonData.boards[0].id;\r",
+							"console.log(FirstBoardID);\r",
+							"var SecondBoardID = jsonData.boards[1].id;\r",
+							"var LastBoardID = jsonData.boards[numberOfBoards-1].id;\r",
+							"console.log(LastBoardID);\r",
+							"\r",
+							"pm.collectionVariables.set(\"firstBoardId\" , FirstBoardID);\r",
+							"pm.collectionVariables.set(\"secondBoardId\" , SecondBoardID);\r",
+							"pm.collectionVariables.set(\"lastBoardId\" , LastBoardID);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{trelloBaseURL}}/1/members/me?boards=open&key={{key}}&token={{token}}",
+					"host": [
+						"{{trelloBaseURL}}"
+					],
+					"path": [
+						"1",
+						"members",
+						"me"
+					],
+					"query": [
+						{
+							"key": "boards",
+							"value": "open"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response Body contains meaningful message\", function () {\r",
+							"pm.expect(pm.response.text()).to.include(\"not found\" || \"deleted\" || \"removed\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response code is 200\", function(){\r",
+							"pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{trelloBaseURL}}/1/boards/{{lastBoardId}}?key={{key}}&token={{token}}",
+					"host": [
+						"{{trelloBaseURL}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{lastBoardId}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response has id\", function () {\r",
+							"pm.expect(jsonData.id).exist;\r",
+							"});\r",
+							"pm.test(\"Response has name\", function () {\r",
+							"pm.expect(jsonData.name).exist;\r",
+							"});\r",
+							"pm.test(\"Response has idBoard\", function () {\r",
+							"pm.expect(jsonData.idBoard).exist;\r",
+							"});\r",
+							"pm.test(\"closed is false\", function () {\r",
+							"pm.expect(jsonData.closed).is.false;\r",
+							"});\r",
+							"pm.test(\"limits is empty\", function () {\r",
+							"pm.expect(jsonData.limits).is.empty;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{trelloBaseURL}}/1/lists?name=Mokhtar new list&idBoard={{firstBoardId}}&key={{key}}&token={{token}}",
+					"host": [
+						"{{trelloBaseURL}}"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Mokhtar new list"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{firstBoardId}}"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get lists from a board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"var numberOfLists = jsonData.length;\r",
+							"\r",
+							"pm.test(\"Board has 3 lists\", function(){\r",
+							"pm.expect(numberOfLists).equal(3);\r",
+							"});\r",
+							"\r",
+							"var listId = jsonData[0].id;\r",
+							"\r",
+							"pm.collectionVariables.set(\"listId\" , listId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{trelloBaseURL}}/1/boards/{{secondBoardId}}/lists?key={{key}}&token={{token}}",
+					"host": [
+						"{{trelloBaseURL}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{secondBoardId}}",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "archive or unarchive a list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"response code is 200\", function(){\r",
+							"pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"closed value is correct\", function(){\r",
+							"if(pm.variables.get(\"archiveValue\") == true){\r",
+							"    pm.collectionVariables.set(\"archiveValue\" , false);\r",
+							"    pm.expect(jsonData.closed).is.true;\r",
+							"}else {\r",
+							"    pm.collectionVariables.set(\"archiveValue\" , true);\r",
+							"    pm.expect(jsonData.closed).is.false;\r",
+							"}\r",
+							"});\r",
+							"\r",
+							"pm.test(\"set-cookie header is correct\", function(){\r",
+							"    pm.expect(pm.response.headers.get('Set-Cookie')).to.include('isEnterpriseAdmin%3Dfalse');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{trelloBaseURL}}/1/lists/{{listId}}/closed?key={{key}}&token={{token}}&value={{archiveValue}}",
+					"host": [
+						"{{trelloBaseURL}}"
+					],
+					"path": [
+						"1",
+						"lists",
+						"{{listId}}",
+						"closed"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "value",
+							"value": "{{archiveValue}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "key",
+			"value": "bb4da47ecc155bade26cd9f6577c6873"
+		},
+		{
+			"key": "token",
+			"value": "084b2b1596e30c0416268b1055e3ab987540a065ab179278c9e160e5086293de"
+		},
+		{
+			"key": "numberOfBoards",
+			"value": "0"
+		},
+		{
+			"key": "lastBoardId",
+			"value": "0"
+		},
+		{
+			"key": "firstBoardId",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "secondBoardId",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "listId",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "archiveValue",
+			"value": "true",
+			"type": "string"
+		}
+	]
+}
