@@ -134,7 +134,7 @@
 						"exec": [
 							"\r",
 							"pm.test(\"Response Body contains meaningful message\", function () {\r",
-							"pm.expect(pm.response.text()).to.include(\"not found\" || \"deleted\" || \"removed\");\r",
+							"pm.expect(pm.response.text()).to.include(\"not found\" || \"board deleted successfully\" || \"removed\");\r",
 							"});\r",
 							"\r",
 							"pm.test(\"response code is 200\", function(){\r",
